@@ -1,4 +1,5 @@
 const {Telegraf} = require('telegraf')
+const telegrafGetChatMembers = require('telegraf-getchatmembers')
 const dotenv = require('dotenv')
 const reaction = require('./reaction')
 const commands = require('./commands')
@@ -7,10 +8,7 @@ const commands = require('./commands')
 dotenv.config()
 const token = process.env.TOKEN
 const bot = new Telegraf(token)
-
-// bot.command('id', (context) => {
-//     context.reply(context.chat.id)
-// })
+bot.use(telegrafGetChatMembers)
 
 const isWhitelisted = (chatId) => process.env.WHITELIST.split(',').includes(chatId.toString())
 const isCommand = (msg) => msg.slice(0, 1) === '/'
