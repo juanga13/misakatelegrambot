@@ -7,14 +7,15 @@ const MESSAGE_TYPES = require("./const")
  * @param {string} msg
  */
 module.exports = (context, msg) => {
-    let index;
-    Object.values(REACTIONS).forEach((reaction, i) => {
-        if (reaction.regex.test(msg)) index = REACTIONS[i]
+    let reaction;
+    Object.values(REACTIONS).forEach((r) => {
+        if (r.regex.test(msg)) reaction = r
     })
-    if (!index) return { msg: null, options: null }
+    console.log(reaction)
+    if (!reaction) return { msg: null, options: null }
     return {
-        msg: REACTIONS[index].message(msg),
-        options: REACTIONS[index].reply,
+        msg: reaction.message(msg),
+        options: reaction.reply,
     }
 }
 

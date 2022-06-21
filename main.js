@@ -20,6 +20,7 @@ bot.on('text', (context) => {
     console.log(context.message.text)
     const messageText = context.message.text.toString().toLowerCase()
     const {msg, options}= reaction(context, messageText)
+    console.log({msg, options})
     if (isCommand(messageText)) {
         const commandReply = commands(context, messageText.slice(1).split(' '))
         _sendMessage(context, commandReply)
